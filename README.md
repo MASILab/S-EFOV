@@ -8,11 +8,15 @@ We introduce a semantic FOV extension procedure to correct the measurement offse
 <img src="https://github.com/MASILab/S-EFOV/blob/master/materials/report_example.jpg" width="600px"/>
 
 ## Citation
-If you find this study can help your work, please cite the following paper. 
-The code and docker are free for noncommercial purposes. The licence.md shows the terms for commercial and for-profit purposes.
+If you find this study can help your work, please cite the following paper.
 ```
 TODO
 ```
+
+## License
+
+The materials published in this repository, including code and models in the docker container, 
+are free for noncommercial usage (CC BY-NC 4.0). For details of the license, please check the LICENSE.md file. 
 
 ## Quick Start
 #### Get the docker image
