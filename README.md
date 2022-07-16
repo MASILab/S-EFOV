@@ -1,4 +1,4 @@
-# Routine Lung CT-based Body Composition Analysis with Semantically Extended Field-of-view 
+# Automatic Body Composition Assessment using Lung Screening Low-dose Computed Tomography
 ###  [[Project page]](https://github.com/MASILab/S-EFOV/)[[Paper (arXiv)]](https://arxiv.org/abs/2207.06551) 
 
 Body composition (BC) analysis, which captures the physical and
