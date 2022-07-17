@@ -1,22 +1,24 @@
-# Automatic Body Composition Assessment using Lung Screening Low-dose Computed Tomography
+# Thoracic CT-based Body Composition Analysis with Semantically Extended FOV
 ###  [[Project page]](https://github.com/MASILab/S-EFOV/)[[Paper (arXiv)]](https://arxiv.org/abs/2207.06551) 
 
 Body composition (BC) analysis, which captures the physical and
 constitutional characteristics of the human body, can provide valuable
 predictive information for various health
-conditions. In this work, we developed a fully automatic pipeline to the BC measurement using routine lung screening chest 
+conditions. In this work, we developed a fully automatic BC measurement pipeline using routine lung screening chest 
 low-dose computed tomography (LDCT). To overcome the systematic
 field-of-view (FOV) limitations that causing body tissue truncation, we proposed a two-stage method to 
 extend the image border and generate anatomically consistent body tissues in the truncated regions. 
 
-An example report for results obtained on an in-house lung screening CT: 
+A typical result report obtained for a lung cancer screening CT: 
 <img src="https://github.com/MASILab/S-EFOV/blob/master/materials/report_example.jpg" width="600px"/>
 
-## License & Citation
+## Copyright
 
 The contents covered by this repository, including code and pretrained models in the docker container, 
 are free for noncommercial usage (CC BY-NC 4.0). Please check the LICENSE.md file for more details of the copyright 
 information.
+
+## Citation
 
 If you find this study can help your work, please cite the following papers:
 
@@ -28,38 +30,45 @@ Kim L. Sandler, Fabien Maldonado, Bennett A. Landman. (2022). Body Composition A
 ## Quick Start
 #### Get the docker image
 ```
-sudo docker pull kwxu:sefov_bcomp:v0.0.3
+docker pull masidocker/public:lung_body_composition_v1.0.1
 ```
 #### Prepare input data
-The user should specify an input folder which contains the CT image in NIfTI format and a csv file for metadata. 
-The analysis result will be generated at the specified output location.
+User need to prepare an input folder which contains the CT images in NIfTI format (.nii.gz) and
+(optionally) a csv file for metadata to provide the height of the patient.
 
 Step.1 Specify the input directory 
 ```
-export input_dir=/home/input_dir
+export INPUT_DIR=/home/input_dir
 ```
 
-Step.2 Put nifti images under folder $input_dir/NIFTI without sub-folder
+Step.2 Put NIfTI images under folder $input_dir/NIFTI without sub-folder
 
-Step.3 Create a metadata.csv under $input_dir, which contains the following fields: 
+Step.3 Create a metadata.csv under $INPUT_DIR, which should contain the following two fields: 
 ```
-- Patient ID
-- Scan Date
-- NIFTI Filename
-- Sex
-- Height (m)
+- Filename
+- HeightMeters
 ```
+
+An example for input data structure can be obtained via
+
+```
+TODO
+```
+
+Note: as we do not have to permission to share data related to neither the in-house lung screening dataset (VLSP)
+nor the National Lung Screening Trial (NLST), the example data are generated using (TODO) ### cases from ### dataset 
+(link). (Need to mention if the data is lung screening related or not.)
 
 #### Run docker container
 Specify output location
 ```
-export output_dir=$input_dir/output
-mkdir -p $output_dir
+export OUTPUT_DIR=$INPUT_DIR/output
+mkdir -p $OUTPUT_DIR
 ```
 
 Run docker container with input/output location binding
 ```
-sudo docker run -it --gpus all --rm -v $input_dir:/Input -v $output_dir:/Output kwxu:sefov_bcomp:v0.0.3 /app/src/Scripts/docker.sh
+sudo docker run -it --gpus all --rm -v $INPUT_DIR:/Input -v $OUTPUT_DIR:/Output masidocker/public:lung_body_composition_v1.0.1 /app/src/Scripts/docker.sh
 ```
 
 #### Testing platform
@@ -88,4 +97,8 @@ sudo apt-get update
 sudo apt-get install -y nvidia-docker2
 ```
 
+## Additional examples
 
+#### Lung screening chest CT
+
+#### Routine diagnostic chest CT
