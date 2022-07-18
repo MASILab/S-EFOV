@@ -43,21 +43,21 @@ export INPUT_DIR=/home/input_dir
 
 Step.2 Put NIfTI images under folder $input_dir/NIFTI without sub-folder
 
-Step.3 Create a metadata.csv under $INPUT_DIR, which should contain the following two fields: 
+Step.3 Create a metadata.csv under $INPUT_DIR, which contains the following two fields: 
 ```
 - Filename
 - HeightMeters
 ```
+This metadata file is optional. However, the height information is needed to get the normalized BC indexes.
 
-An example for input data structure can be obtained via
+#### Example input dataset
+An example input dataset can be obtained via [https://doi.org/10.5281/zenodo.6853516]
 
-```
-TODO
-```
-
-Note: as we do not have to permission to share data related to neither the in-house lung screening dataset (VLSP)
-nor the National Lung Screening Trial (NLST), the example data are generated using (TODO) ### cases from ### dataset 
-(link). (Need to mention if the data is lung screening related or not.)
+As we do not have to permission to share the thoracic CT data used in the published papers, 
+the example dataset are compiled using four thoracic CT scans selected from the following public available (CC BY 4.0) dataset:
+[The Caner Imaging Archive (TCIA), Chest Imaging with Clinical and Genomic Correlates Representing a Rural COVID-19 Positive Population 
+(COVID-19-AR)](https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70226443#70226443171ba531fc374829b21d3647e95f532c).
+These chest CT imaging studies were acquired for COVID-19 patients.
 
 #### Run docker container
 Specify output location
@@ -78,7 +78,7 @@ sudo docker run -it --gpus all --rm -v $INPUT_DIR:/Input -v $OUTPUT_DIR:/Output 
 - Nvidia-docker version 2.10.0
 
 
-#### install Docker
+#### Install Docker
 ```
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -88,7 +88,7 @@ sudo apt-get update
 sudo apt-get install docker-ce
 ```
 
-#### install Nvidia-Docker
+#### Install Nvidia-Docker
 ```
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
@@ -96,9 +96,3 @@ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 sudo apt-get update
 sudo apt-get install -y nvidia-docker2
 ```
-
-## Additional examples
-
-#### Lung screening chest CT
-
-#### Routine diagnostic chest CT
