@@ -41,7 +41,7 @@ Step.1 Specify the input directory
 export INPUT_DIR=/home/input_dir
 ```
 
-Step.2 Put NIfTI images under folder $input_dir/NIFTI without sub-folder
+Step.2 Put NIfTI images under folder $INPUT_DIR/NIFTI without sub-folder
 
 Step.3 Create a metadata.csv under $INPUT_DIR, which contains the following two fields: 
 ```
