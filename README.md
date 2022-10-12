@@ -23,14 +23,20 @@ information.
 If you find this study can help your work, please cite the following papers:
 
 [1] Kaiwen Xu, Thomas Li, Mirza S. Khan, Riqiang Gao, Sanja L. Antic, Yuankai Huo, 
-Kim L. Sandler, Fabien Maldonado, Bennett A. Landman. (2022). Body Composition Assessment with Limited Field-of-view Computed Tomography: A Semantic Image Extension Perspective. https://arxiv.org/abs/2207.06551. (Submitted to Medical Image Analysis)
+Kim L. Sandler, Fabien Maldonado, Bennett A. Landman. (2022). 
+Body Composition Assessment with Limited Field-of-view Computed Tomography: 
+A Semantic Image Extension Perspective. https://arxiv.org/abs/2207.06551. 
+(Submitted to Medical Image Analysis)
 
-[2] Kaiwen Xu, Riqiang Gao, Yucheng Tang, Steve A. Deppen, Kim L. Sandler, Michael N. Kammer, Sanja L. Antic, Fabien Maldonado, Yuankai Huo, Mirza S. Khan, Bennett A. Landman, "Extending the value of routine lung screening CT with quantitative body composition assessment," Proc. SPIE 12032, Medical Imaging 2022: Image Processing, 120321L (4 April 2022); https://doi.org/10.1117/12.2611784
+[2] Kaiwen Xu, Riqiang Gao, Yucheng Tang, Steve A. Deppen, Kim L. Sandler, Michael N. Kammer, Sanja L. Antic, 
+Fabien Maldonado, Yuankai Huo, Mirza S. Khan, Bennett A. Landman, "Extending the value of routine lung screening 
+CT with quantitative body composition assessment," Proc. SPIE 12032, Medical Imaging 2022: Image Processing, 
+120321L (4 April 2022); https://doi.org/10.1117/12.2611784
 
 ## Quick Start
 #### Get the docker image
 ```
-docker pull masidocker/public:lung_body_composition_v1.0.1
+docker pull masidocker/public:lung_body_composition_v1.0.2
 ```
 #### Prepare input data
 User needs to prepare an input folder which contains the CT images in NIfTI format (.nii.gz) and
@@ -67,20 +73,28 @@ export OUTPUT_DIR=$INPUT_DIR/output
 mkdir -p $OUTPUT_DIR
 ```
 
-Run docker container with input/output location binding
+Run docker container with input/output locations
 ```
-sudo docker run -it --gpus all --rm -v $INPUT_DIR:/Input -v $OUTPUT_DIR:/Output masidocker/public:lung_body_composition_v1.0.1 /app/src/Scripts/docker.sh
+sudo docker run -it --gpus all --rm -v $INPUT_DIR:/Input -v $OUTPUT_DIR:/Output masidocker/public:lung_body_composition_v1.0.2 /app/src/Scripts/docker.sh
 ```
 
 For the folder structure of the output directory, please refer to the README.txt file prepared under the output location.
+Output folder structure:
+```
++ measurements.csv - per image file measurement results, including TCI value (truncation severity) and FOV extension ratio
++ Report_pdf - report in pdf format
++ Temp - all intermediate results
++ log - run time log file for debug
+```
 
 ## Environment Setup
 
 #### Tested platform
-- Ubuntu 20.04
+- Ubuntu 20.04/22.04
 - cuda 11.2/11.3
 - Docker version 20.10.14
 - Nvidia-docker version 2.10.0
+- GPU memory requirement: 12 GB
 
 
 #### Install Docker
