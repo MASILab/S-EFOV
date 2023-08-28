@@ -1,154 +1,74 @@
 # Thoracic CT-based Body Composition Analysis with Semantically Extended FOV
-###  [[Project page]](https://github.com/MASILab/S-EFOV/)[[Paper (arXiv)]](https://arxiv.org/abs/2207.06551) 
 
-Body composition (BC) analysis, which captures the physical and
+This repository provides instructions for using the AI body composition assessment tool described in paper 
+["AI Body Composition in Lung Cancer Screening: Added Value Beyond Lung Cancer Detection"](https://pubs.rsna.org/doi/10.1148/radiol.222937) 
+published in *Radiology* (2023).
+
+[//]: # (The developed pipeline is publicly available and can be deployed in the following two ways: )
+
++ See [QUICK_START.md](https://github.com/MASILab/S-EFOV/blob/master/QUICK_START.md) for instructions of 
+  using the Docker image.
+
+[//]: # (+ See [LOCAL_ENVIRONMENT.md]&#40;https://github.com/MASILab/S-EFOV/blob/master/quick_start_docker.md&#41; to set up a local )
+
+[//]: # (  python environment, retrieve the pretrained models, and run the pipeline with local python environment.)
+
+The repository has been updated since the acceptance of the paper. The original repository can be access via [commit b2ab4db9cf17a9ebe4b13b195491341ac687636b](https://github.com/MASILab/S-EFOV/tree/b2ab4db9cf17a9ebe4b13b195491341ac687636b)
+(Oct 11, 2022, docker image version v1.0.2)
+---
+
+Body composition analysis, which captures the physical and
 constitutional characteristics of the human body, can provide valuable
 predictive information for various health
-conditions. In this work, we developed a fully automatic BC measurement pipeline using routine lung screening chest 
-low-dose computed tomography (LDCT). To overcome the systematic
+outcomes. In this work, we developed a fully automatic pipeline to derive body composition measurements from 
+routine lung screening chest low-dose computed tomography (LDCT). To overcome the systematic
 field-of-view (FOV) limitations that causing body tissue truncation, we proposed a two-stage method to 
 extend the image border and generate anatomically consistent body tissues in the truncated regions. 
+See [our manuscript](https://www.sciencedirect.com/science/article/abs/pii/S1361841523001123?via%3Dihub) 
+published in *Medical Image Analysis* (2023) for more details.
 
-A typical result report obtained for a lung cancer screening CT: 
-<img src="https://github.com/MASILab/S-EFOV/blob/master/materials/report_example.jpg" width="600px"/>
+An overview of the framework:
 
-## Copyright
+<img src="https://github.com/MASILab/S-EFOV/blob/master/materials/fig-method-overall-workflow.jpg" width="600px"/>
 
-The contents covered by this repository, including code and pretrained models in the docker container, 
-are free for noncommercial usage (CC BY-NC 4.0). Please check the LICENSE.md file for more details of the copyright 
-information.
+A typical result report obtained for a lung cancer screening CT:
+
+<img src="https://github.com/MASILab/S-EFOV/blob/master/materials/report_example.png" width="600px"/>
 
 ## Citation
 
-If you find this study can help your work, please cite the following papers:
+If you find this study can help your work, please consider to cite the following papers.
 
-[1] Kaiwen Xu, Thomas Li, Mirza S. Khan, Riqiang Gao, Sanja L. Antic, Yuankai Huo, 
-Kim L. Sandler, Fabien Maldonado, Bennett A. Landman. (2022). 
-Body Composition Assessment with Limited Field-of-view Computed Tomography: 
-A Semantic Image Extension Perspective. https://arxiv.org/abs/2207.06551. 
-(Submitted to Medical Image Analysis)
+#### The body composition measurements improved the prediction for lung cancer death, CVD death, and all-cause mortality in the CT arm of the [National Lung Screening Trial (NLST)](https://www.cancer.gov/types/lung/research/nlst):
 
-[2] Kaiwen Xu, Riqiang Gao, Yucheng Tang, Steve A. Deppen, Kim L. Sandler, Michael N. Kammer, Sanja L. Antic, 
+Kaiwen Xu, Mirza S. Khan, Thomas Li, Riqiang Gao, James G. Terry, Yuankai Huo, John Jeffrey Carr, Fabien Maldonado,
+Bennett A. Landman, Kim L. Sandler (2023). AI Body Composition in Lung Cancer Screening: Added Value Beyond Lung 
+Cancer Detection. *Radiology*, 308(1). https://doi.org/10.1148/radiol.222937
+
+#### A two-stage FOV extension module to compensate for the systematic FOV restriction: 
+
+Kaiwen Xu, Thomas Li, Mirza S. Khan, Riqiang Gao, Sanja L. Antic, Yuankai Huo, 
+Kim L. Sandler, Fabien Maldonado, Bennett A. Landman. (2023). 
+Body composition assessment with limited field-of-view computed tomography: A semantic image extension perspective.
+*Medical Image Analysis*, 88, 102852. https://doi.org/10.1016/j.media.2023.102852
+[[arxiv version]](https://arxiv.org/abs/2207.06551)
+
+#### An early version of the pipeline, with automatic slice level selection and body composition segmentation:  
+
+Kaiwen Xu, Riqiang Gao, Yucheng Tang, Steve A. Deppen, Kim L. Sandler, Michael N. Kammer, Sanja L. Antic, 
 Fabien Maldonado, Yuankai Huo, Mirza S. Khan, Bennett A. Landman, "Extending the value of routine lung screening 
 CT with quantitative body composition assessment," Proc. SPIE 12032, Medical Imaging 2022: Image Processing, 
-120321L (4 April 2022); https://doi.org/10.1117/12.2611784
+120321L (4 April 2022); https://doi.org/10.1117/12.2611784 
+[[PubMed version]](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9604426/)
 
-## Quick Start
-#### Get the docker image
-```
-docker pull masidocker/public:lung_body_composition_v1.0.2
-```
-#### Prepare input data
-User needs to prepare an input folder which contains the CT images in NIfTI format (.nii.gz) and
-(optionally) a csv file for metadata to provide the height of the patient.
+## License
 
-Step.1 Specify the input directory 
-```
-export INPUT_DIR=/home/input_dir
-```
-
-Step.2 Put NIfTI images under folder $INPUT_DIR/NIFTI without sub-folder
-
-Step.3 Create a metadata.csv under $INPUT_DIR, which contains the following two fields: 
-```
-- Filename
-- HeightMeters
-```
-This metadata file is optional. However, the height data are needed to get the normalized BC indexes.
-
-#### Example input dataset
-An example input dataset can be obtained via https://doi.org/10.5281/zenodo.6853516
-
-Note: as we do not have the permission to share the lung screening CT data used in our published papers, 
-the example dataset are compiled using four thoracic CT scans selected from the following public available (CC BY 4.0) dataset:
-[The Caner Imaging Archive (TCIA), Chest Imaging with Clinical and Genomic Correlates Representing a Rural COVID-19 Positive Population 
-(COVID-19-AR)](https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70226443#70226443171ba531fc374829b21d3647e95f532c).
-These chest CT imaging studies were acquired for COVID-19 patients. Though these scans were not acquired 
-under lung cancer screening protocols, they can still serve for demonstration purposes. 
-
-#### Run docker container
-Specify output location
-```
-export OUTPUT_DIR=$INPUT_DIR/output
-mkdir -p $OUTPUT_DIR
-```
-
-Run docker container with input/output locations
-```
-sudo docker run -it --gpus all --rm -v $INPUT_DIR:/Input -v $OUTPUT_DIR:/Output masidocker/public:lung_body_composition_v1.0.2 /app/src/Scripts/docker.sh
-```
-
-For the folder structure of the output directory, please refer to the README.txt file prepared under the output location.
-Output folder structure:
-```
-+ measurements.csv - per image file measurement results, including TCI value (truncation severity) and FOV extension ratio
-+ Report_pdf - report in pdf format
-+ Temp - all intermediate results
-+ log - run time log file for debug
-```
-
-## Environment Setup
-
-#### Tested platform
-- Ubuntu 20.04/22.04
-- cuda 11.2/11.3
-- Docker version 20.10.14
-- Nvidia-docker version 2.10.0
-- GPU memory requirement: 12 GB
-
-
-#### Install Docker
-```
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-sudo apt-get update
-sudo apt-get install docker-ce
-```
-
-#### Install Nvidia-Docker
-```
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-sudo apt-get update
-sudo apt-get install -y nvidia-docker2
-```
-
-## Convert Image Data to NIfTI Format
-
-#### Convert from DICOM
-
-dcm2niix was the tool we used in our study to convert DICOM images to NIfTI format. The software is 
-freely available at https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage
-
-Use dcm2niix to convert DICOM images to NIfTI images:
-```
-dcm2niix -z y -f %j -o /path_to_output /path_to_input_dicom_folder
-```
-
-This will generate a NIfTI format image (.nii.gz) with `seriesInstanceUID` as the filename, along with a json file 
-for key metadata.
-
-The version of dcm2niix used in our study: `v1.0.20211006  (JP2:OpenJPEG) (JP-LS:CharLS) GCC7.5.0 x86-64 (64-bit Linux)`
-
-#### Convert from other imaging formats
-
-[Convert3D (c3d)](http://www.itksnap.org/pmwiki/pmwiki.php?n=Convert3D.Convert3D) 
-is able to convert images generated from DICOM in other format to NIfTI. The input can be any image
-format that readable by ITK.
-
-For example, convert an image in Nrrd ("nearly raw raster data") format to NIfTI
-```
-c3d ./img.nrrd -o ./img.nii.gz
-```
+This project is under the CC BY-NC 4.0 license. See
+[LICENSE.md](https://github.com/MASILab/S-EFOV/blob/master/LICENSE.md) for more details.
 
 ## Disclaimer
 
 The code and data of this repository are provided to promote reproducible research. 
-They are not intended for clinical care or commercial use.
-
 The software is provided "as is", without warranty of any kind,
 express or implied, including but not limited to the warranties of merchantability, 
 fitness for a particular purpose and noninfringement. 
