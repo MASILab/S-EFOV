@@ -14,9 +14,9 @@ Step.1 Specify the input directory
 INPUT_DIR=./Input
 ```
 
-Step.2 Put NIfTI images under folder $INPUT_DIR/NIFTI without sub-folder
+Step.2 Put NIfTI images under folder `$INPUT_DIR/NIFTI` without sub-folder
 
-Step.3 Create a file named "metadata.csv" under $INPUT_DIR, which contains the following two fields: 
+Step.3 Create a file named `metadata.csv` under `$INPUT_DIR`, which contains the following two fields: 
 ```
 - Filename
 - HeightMeters
@@ -43,7 +43,7 @@ docker run -it \
 ```
 
 Note: for Linux, some [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) are needed 
-to run Docker as non-root users. The "-u" ("--user") argument is specified to solve the 
+to run Docker as non-root users. The "-u" ("--user") argument `-u "$(id -u):$(id -g)"` is specified to solve the 
 [output file permission problem of Docker on Linux](https://vsupalov.com/docker-shared-permissions/).
 
 #### Output
