@@ -1,6 +1,6 @@
 
 ## Instructions of using the body composition analysis Docker image
-[Setup Docker environment](#Environment Setup)
+[Setup Docker environment](#Environment-Setup)
 #### Get the docker image
 ```
 docker pull masidocker/public:lung_body_composition_v1.0.3
