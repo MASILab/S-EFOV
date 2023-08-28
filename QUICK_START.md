@@ -202,7 +202,7 @@ c3d ./img.nrrd -o ./img.nii.gz
 
 #### v1.0.2 (October 6, 2022)
 
-This is version used in publication https://pubs.rsna.org/doi/10.1148/radiol.222937
+This is the version used in publication https://pubs.rsna.org/doi/10.1148/radiol.222937
 
 + Add the measurements for mean attenuation and standard deviation.
 
