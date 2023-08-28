@@ -7,8 +7,7 @@ published in *Radiology* (2023).
 + See [QUICK_START.md](https://github.com/MASILab/S-EFOV/blob/master/QUICK_START.md) for instructions of 
   using the Docker image.
 
-The repository has been updated since the acceptance of the paper. The original repository can be access via [commit b2ab4db9cf17a9ebe4b13b195491341ac687636b](https://github.com/MASILab/S-EFOV/tree/b2ab4db9cf17a9ebe4b13b195491341ac687636b)
-(Oct 11, 2022, docker image version v1.0.2)
+#### The repository has been updated since the acceptance of the paper. The original repository can be access via [commit b2ab4db9cf17a9ebe4b13b195491341ac687636b](https://github.com/MASILab/S-EFOV/tree/b2ab4db9cf17a9ebe4b13b195491341ac687636b) (Oct 11, 2022, docker image version v1.0.2)
 ---
 
 Body composition analysis, which captures the physical and
