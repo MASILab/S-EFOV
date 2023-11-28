@@ -1,6 +1,6 @@
 # Thoracic CT-based Body Composition Analysis with Semantically Extended FOV
 
-This repository provides instructions for using the AI body composition assessment tool described in paper 
+This repository provides instructions for the body composition assessment tool described in paper 
 ["AI Body Composition in Lung Cancer Screening: Added Value Beyond Lung Cancer Detection"](https://pubs.rsna.org/doi/10.1148/radiol.222937) 
 published in *Radiology* (2023).
 
