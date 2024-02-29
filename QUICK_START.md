@@ -7,7 +7,10 @@ docker pull masidocker/public:lung_body_composition_v1.0.3
 ```
 #### Prepare input data
 Create an input folder which contains the CT images in NIfTI format (.nii.gz) and
-(optionally) a csv file for metadata to provide the height of the patient.
+(optionally) a csv file for metadata to provide the height of the patient. Make sure
+the NIfTI files are encoded in the "LAS" (nibabel) orientation. See 
+[Image voxel orientation](#Image-voxel-orientation)
+for more details.
 
 Step.1 Specify the input directory 
 ```
@@ -186,6 +189,13 @@ For example, convert an image in Nrrd ("nearly raw raster data") format to NIfTI
 ```
 c3d ./img.nrrd -o ./img.nii.gz
 ```
+
+#### Image voxel orientation
+
+Following the radiological convention, the pipeline assumes an orientation encoding of "LAS" (axis-1: right-left, axis-2: posterior-anterior, axis-3: inferior-superior). The orientation of a CT scan can be verified using the [nibabel package](https://nipy.org/nibabel/image_orientation.html). The return value of `nib.aff2axcodes` should be ("L", "A", "S"). In ITK-Snap (as well as c3d), however, the orientation encoding should be displayed as "RPI" (3-Letter "from" Name). See the following article for a detailed explaination of the encoding system terminology:
+
+[Orientation and Voxel-Order Terminology: RAS, LAS, LPI, RPI, XYZ and All That](http://www.grahamwideman.com/gw/brain/orientation/orientterms.htm)
+
 
 ## Changelog
 
